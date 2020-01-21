@@ -11,4 +11,5 @@
 |
 */
 
+Route::get('/posts/index', 'PostController@index')->name('posts.index');
 Route::get('/categories/index', 'CategoryController@index')->name('categories.index');
