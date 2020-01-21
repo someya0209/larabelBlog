@@ -12,4 +12,7 @@
 */
 
 Route::get('/posts/index', 'PostController@index')->name('posts.index');
+
 Route::get('/categories/index', 'CategoryController@index')->name('categories.index');
+Route::get('/categories/create', 'CategoryController@showCreateForm')->name('categories.create');
+Route::post('/categories/create', 'CategoryController@create');

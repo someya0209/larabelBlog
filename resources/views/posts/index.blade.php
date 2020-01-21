@@ -10,7 +10,9 @@
 <body>
     <header>
         <nav class="my-navbar">
-            <a class="my-navbar-brand" href="/">ToDo App</a>
+          <a class="my-navbar-brand" href="/">ToDo App</a>
+          <a class="my-navbar-brand" href="{{ route('posts.index') }}">記事一覧</a>
+          <a class="my-navbar-brand" href="{{ route('categories.index') }}">カテゴリ一覧</a>
         </nav>
     </header>
     <main>
