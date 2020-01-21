@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ToDo App</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    <header>
-        <nav class="my-navbar">
-          <a class="my-navbar-brand" href="/">ToDo App</a>
-          <a class="my-navbar-brand" href="{{ route('posts.index') }}">記事一覧</a>
-          <a class="my-navbar-brand" href="{{ route('categories.index') }}">カテゴリ一覧</a>
-        </nav>
-    </header>
-    <main>
+@extends('layout')
+
+@section('content')
         <div class="container">
 
             <!-- 各ブログの内容表示とインフォメーション　-->
@@ -58,6 +43,4 @@
                 </div>
             </div>
         </div>
-    </main>
-</body>
-</html>
+@endsection
