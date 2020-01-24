@@ -20,6 +20,24 @@ class PostController extends Controller
         ]);
     }
 
+    public function search(Request $request){
+        //$posts = Post::all();
+        #キーワード受け取り
+        $keyword = $request->input('keyword');
+
+        #もしキーワードがあったら
+        if(!empty($keyword))
+        {
+            $posts = Auth::user()->posts()->where('title','like','%'.$keyword.'%')->get();
+        }else{
+            $posts = Auth::user()->posts()->get();
+        }
+
+        return view('posts/index', [
+            'posts' => $posts,
+        ]);
+    }
+
     public function showCreateForm()
     {
         $categories = Category::all();
