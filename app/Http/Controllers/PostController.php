@@ -7,11 +7,13 @@ use App\Category;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Auth::user()->posts()->get();
         return view('posts/index', [
             'posts' => $posts,
         ]);
@@ -32,7 +34,7 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->category_id = $request->category_id;
 
-        $post->save();
+        Auth::user()->posts()->save($post);
 
         return redirect()->route('posts.index');
     }
