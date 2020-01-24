@@ -64,4 +64,11 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function view(Post $post)
+    {
+        return view('posts/view', [
+            'post' => $post,
+        ]);
+    }
 }

@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'can:view,post'], function() {
         Route::get('/posts/{post}/edit', 'PostController@showEditForm')->name('posts.edit');
         Route::post('/posts/{post}/edit', 'PostController@edit');
+        Route::get('/posts/{post}/view', 'PostController@view')->name('posts.view');
     });
     Route::get('/posts/index', 'PostController@index')->name('posts.index');
     Route::get('/posts/create', 'PostController@showCreateForm')->name('posts.create');
