@@ -12,11 +12,10 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
+    'reset' => 'パスワードを再設定しました。',
+    'sent' => 'パスワード再設定リンクを送信しました。',
+    'token' => 'トークンが無効です。',
+    'user' => "入力されたメールアドレスのユーザーは見つかりませんでした。",
     'throttled' => 'Please wait before retrying.',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
 
 ];
