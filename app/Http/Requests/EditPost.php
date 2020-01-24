@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Category;
-use Illuminate\Validation\Rule;
 
-class CreatePost extends FormRequest
+class EditPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
