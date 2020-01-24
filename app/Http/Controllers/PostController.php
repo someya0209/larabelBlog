@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
@@ -22,8 +23,10 @@ class PostController extends Controller
     public function showCreateForm()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         return view('posts/create',[
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -35,6 +38,7 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
 
         Auth::user()->posts()->save($post);
+        $post->tags()->attach(request()->tags);
 
         return redirect()->route('posts.index');
     }

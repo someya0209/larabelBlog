@@ -24,6 +24,10 @@
                             <small class="label-info" style="font-size: medium;">カテゴリ：{{ $post->category->title }}
                                 作成時：{{ $post->created_at }}
                                 変更時：{{ $post->modified_at }}
+                                タグ：
+                                @foreach($post->tags as $tag)
+                                    {{ $tag->title }}
+                                @endforeach
                             </small>
                         </h2>
                         <!-- 本文とタグとアクション -->
