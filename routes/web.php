@@ -13,7 +13,7 @@
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::group(['middleware' => 'can:view,folder'], function() {
+    Route::group(['middleware' => 'can:view,post'], function() {
         Route::get('/posts/{post}/edit', 'PostController@showEditForm')->name('posts.edit');
         Route::post('/posts/{post}/edit', 'PostController@edit');
     });

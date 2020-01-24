@@ -46,20 +46,21 @@ class PostController extends Controller
     public function showEditForm(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
         return view('posts/edit', [
             'post' => $post,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
-    public function edit(int $id, EditPost $request)
+    public function edit(Post $post, EditPost $request)
     {
-        $post = Post::find($id);
-
         $post->title = $request->title;
         $post->body = $request->body;
         $post->category_id = $request->category_id;
         $post->save();
+        $post->tags()->attach(request()->tags);
 
         return redirect()->route('posts.index');
     }

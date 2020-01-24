@@ -42,6 +42,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="tag">タグ</label>
+                            @foreach ($tags as $tag)
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_id"
+                                >
+                                    {{ $tag->title }}
+                                </input>
+                            @endforeach
+                        </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary">送信</button>
                         </div>
