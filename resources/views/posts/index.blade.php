@@ -28,7 +28,7 @@
                         </h2>
                         <!-- 本文とタグとアクション -->
                         <p>{{ $post->body }}</p>
-                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-default btn-block">
+                        <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-default btn-block">
                           変更
                         </a>
                     </div>

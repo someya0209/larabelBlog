@@ -15,7 +15,7 @@
                     </div>
                     @endif
                     <form
-                        action="{{ route('posts.edit', ['id' => $post->id]) }}"
+                        action="{{ route('posts.edit', ['post' => $post]) }}"
                         method="POST"
                     >
                         @csrf

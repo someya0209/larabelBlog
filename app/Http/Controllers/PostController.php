@@ -39,9 +39,8 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function showEditForm(int $id)
+    public function showEditForm(Post $post)
     {
-        $post = Post::find($id);
         $categories = Category::all();
         return view('posts/edit', [
             'post' => $post,
