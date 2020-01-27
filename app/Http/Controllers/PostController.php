@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index(){
         //$posts = Post::all();
-        $posts = Auth::user()->posts()->get();
+        $posts = Auth::user()->posts()->paginate(10);
         return view('posts/index', [
             'posts' => $posts,
         ]);
@@ -28,9 +28,9 @@ class PostController extends Controller
         #もしキーワードがあったら
         if(!empty($keyword))
         {
-            $posts = Auth::user()->posts()->where('title','like','%'.$keyword.'%')->get();
+            $posts = Auth::user()->posts()->where('title','like','%'.$keyword.'%')->paginate(10);
         }else{
-            $posts = Auth::user()->posts()->get();
+            $posts = Auth::user()->posts()->paginate(10);
         }
 
         return view('posts/index', [

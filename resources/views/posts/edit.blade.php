@@ -26,8 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label for="body">内容</label>
-                            <input type="text" class="form-control" name="body" id="body"
-                            value="{{ old('body') ?? $post->body }}" />
+                            {{Form::textarea('body', null, ['class' => 'form-control', 'id' => 'body', 'value' => old('body') ?? $post->body])}}
                         </div>
                         <div class="form-group">
                             <label for="category">カテゴリ</label>

@@ -30,36 +30,38 @@
             @foreach($posts as $post)
             <nav class="panel panel-default">
 
-                <div class="panel-heading">{{ $post->title }}</div>
+                <div class="panel-heading"><h3>{{ $post->title }}</h3></div>
                 <div class="panel-body">
-                    <ul class="post-element" style="font-size: medium;">
+                    <ul class="list-unstyled" style="font-size: medium;">
                         <li>作成時：{{ $post->created_at }}</li>
                         <li>変更時：{{ $post->modified_at }}</li><br>
                         <li>カテゴリ：{{ $post->category->title }}</li>
-                        <li>タグ：</li>
-                        <li>@foreach($post->tags as $tag)</li>
-                        <li>{{ $tag->title }}</li>
-                        <li>@endforeach</li>
+                        <li>タグ：
+                        @foreach($post->tags as $tag)
+                        {{ $tag->title }}
+                        @endforeach
+                        </li>
                     </ul>
                 </h2>
                 <!-- 本文とタグとアクション -->
-                <p>{{ $post->body }}</p>
-                <a href="{{ route('posts.view', ['post' => $post]) }}" class="btn btn-default ">
-                    閲覧
-                </a>
-                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-default ">
-                    変更
-                </a>
-                <form id="delete-form" action="{{ route('posts.delete', ['post' => $post]) }}" method="POST">
-                  @csrf
-                  <button type="submit" class="btn btn-primary">削除</button>
-                </form>
+                <p>{!! nl2br($post->body) !!}</p>
+                <div class="list-unstyled" style="font-size: medium;">
+                    <a href="{{ route('posts.view', ['post' => $post]) }}" class="btn btn-default ">
+                        閲覧
+                    </a>
+                    <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-default ">
+                        変更
+                    </a>
+                    <form id="delete-form" action="{{ route('posts.delete', ['post' => $post]) }}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-default check">削除</button>
+                    </form>
+                </div>
             </div>
         </nav>
 
         @endforeach
-
-
+        {{$posts->links()}}
     </div>
 </div>
 
@@ -72,4 +74,19 @@
     </div>
 </div>
 </div>
+@endsection
+
+@section('script')
+  <script>
+  $(function(){
+      $(".check").click(function(){
+          if(confirm("本当に削除しますか？")){
+              //そのままsubmit（削除）
+          }else{
+              //cancel
+              return false;
+          }
+      });
+  });
+  </script>
 @endsection
