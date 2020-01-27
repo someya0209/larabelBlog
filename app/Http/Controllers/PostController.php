@@ -83,6 +83,15 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    public function delete(Post $post)
+    {
+        \DB::transaction(function () use ($post) {
+            $post->delete();
+        });
+
+        return redirect()->route('posts.index');
+    }
+
     public function view(Post $post)
     {
         return view('posts/view', [

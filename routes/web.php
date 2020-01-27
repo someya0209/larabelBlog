@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/posts/{post}/edit', 'PostController@showEditForm')->name('posts.edit');
         Route::post('/posts/{post}/edit', 'PostController@edit');
         Route::get('/posts/{post}/view', 'PostController@view')->name('posts.view');
+        Route::post('/posts/{post}/delete', 'PostController@delete')->name('posts.delete');
     });
     Route::get('/posts/index', 'PostController@index')->name('posts.index');
     Route::get('/posts/search', 'PostController@search')->name('posts.search');

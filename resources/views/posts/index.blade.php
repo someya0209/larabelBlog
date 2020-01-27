@@ -32,23 +32,28 @@
 
                 <div class="panel-heading">{{ $post->title }}</div>
                 <div class="panel-body">
-                    <small class="label-info" style="font-size: medium;">カテゴリ：{{ $post->category->title }}
-                        作成時：{{ $post->created_at }}
-                        変更時：{{ $post->modified_at }}
-                        タグ：
-                        @foreach($post->tags as $tag)
-                        {{ $tag->title }}
-                        @endforeach
-                    </small>
+                    <ul class="post-element" style="font-size: medium;">
+                        <li>作成時：{{ $post->created_at }}</li>
+                        <li>変更時：{{ $post->modified_at }}</li><br>
+                        <li>カテゴリ：{{ $post->category->title }}</li>
+                        <li>タグ：</li>
+                        <li>@foreach($post->tags as $tag)</li>
+                        <li>{{ $tag->title }}</li>
+                        <li>@endforeach</li>
+                    </ul>
                 </h2>
                 <!-- 本文とタグとアクション -->
                 <p>{{ $post->body }}</p>
-                <a href="{{ route('posts.view', ['post' => $post]) }}" class="btn btn-default btn-block">
+                <a href="{{ route('posts.view', ['post' => $post]) }}" class="btn btn-default ">
                     閲覧
                 </a>
-                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-default btn-block">
+                <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-default ">
                     変更
                 </a>
+                <form id="delete-form" action="{{ route('posts.delete', ['post' => $post]) }}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-primary">削除</button>
+                </form>
             </div>
         </nav>
 
