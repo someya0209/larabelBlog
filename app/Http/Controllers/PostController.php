@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index(){
-        //$posts = Post::all();
-        $posts = Auth::user()->posts()->paginate(10);
+        $posts = Post::paginate(10);
+        //ユーザーの記事のみ表示
+        //$posts = Auth::user()->posts()->paginate(10);
+        $categories = Category::all();
+        $tags = Tag::all();
+
         return view('posts/index', [
             'posts' => $posts,
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -24,17 +30,34 @@ class PostController extends Controller
         //$posts = Post::all();
         #キーワード受け取り
         $keyword = $request->input('keyword');
+        #カテゴリid受け取り
+        $category = $request->input('category');
+        #タグid受け取り
+        $tags = $request->input('tags');
 
-        #もしキーワードがあったら
-        if(!empty($keyword))
-        {
-            $posts = Auth::user()->posts()->where('title','like','%'.$keyword.'%')->paginate(10);
-        }else{
-            $posts = Auth::user()->posts()->paginate(10);
+        $query = Post::query();
+
+        if($request->has('keyword')) {
+           $query->where('title', 'like', '%'.$keyword.'%');
         }
+        if($request->has('category')) {
+           $query->where('category_id', 'like', '%'.$category.'%');
+        }
+        if($request->has('tags')) {
+           $query->whereHas('tags', function($query_t) use ($tags) {
+                foreach ($tags as $key => $id) {
+                    $query_t->where('id', 'like', '%'.$id.'%');
+                }
+            });
+        }
+        $posts = $query->paginate(10);
 
+        $categories = Category::all();
+        $tags = Tag::all();
         return view('posts/index', [
             'posts' => $posts,
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 

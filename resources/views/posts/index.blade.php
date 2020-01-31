@@ -8,6 +8,24 @@
       <div class="form-group">
       <input type="text" name="keyword" value="{{ old('keyword')}}" class="form-control" placeholder="タイトルを入力してください">
       </div>
+      <div class="form-group">
+          <select name="category">
+              <option value="">選択してください </option>
+              @foreach($categories as $category)
+              <option
+                  value="{{ $category->id }}"
+              >
+                  {{$category->title}}
+              </option>
+              @endforeach
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="tag">タグ</label>
+          @foreach ($tags as $tag)
+              <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->title }}
+          @endforeach
+      </div>
       <input type="submit" value="検索" class="btn btn-info">
     </form>
     </div>
