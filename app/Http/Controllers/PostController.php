@@ -91,7 +91,6 @@ class PostController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $image) {
                 // アップロードしたファイル名を取得
-                // ファイル名がかぶる可能性、あとで修正
                 $upload_name = $key."_".$_FILES['images']['name'][$key];
                 $filename = $image->storeAs($up_dir, $upload_name, 'public');
 
@@ -106,10 +105,16 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+        $post_tags = array();
+
+        foreach ($post->tags as $key => $tag) {
+            array_push($post_tags,$tag->id);
+        }
         return view('posts/edit', [
             'post' => $post,
             'categories' => $categories,
             'tags' => $tags,
+            'post_tags' => $post_tags,
         ]);
     }
 
