@@ -45,11 +45,12 @@ class PostController extends Controller
            $query->where('category_id', $category);
         }
         if($request->filled('tags')) {
-           $query->whereHas('tags', function($query_t) use ($tags) {
-                foreach ($tags as $key => $id) {
+            //wherehas内でforeachを回すとうまくいかない
+            foreach ($tags as $key => $id) {
+                $query->whereHas('tags', function($query_t) use ($id) {
                     $query_t->where('id', $id);
-                }
-            });
+                });
+            }
         }
         $posts = $query->paginate(10);
 
