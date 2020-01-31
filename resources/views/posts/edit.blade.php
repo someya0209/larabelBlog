@@ -17,6 +17,7 @@
                     <form
                         action="{{ route('posts.edit', ['post' => $post]) }}"
                         method="POST"
+                        enctype="multipart/form-data"
                     >
                         @csrf
                         <div class="form-group">
@@ -51,6 +52,14 @@
                                     {{ $tag->title }}
                                 </input>
                             @endforeach
+                        </div>
+                        <div class="form-group">
+                            <label for="image">画像ファイル</label>
+                            <input type="file" name="images[]">
+                            <input type="file" name="images[]">
+                            <input type="file" name="images[]">
+                            <input type="file" name="images[]">
+                            <input type="file" name="images[]">
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary">送信</button>
