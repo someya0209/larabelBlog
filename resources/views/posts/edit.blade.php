@@ -61,6 +61,19 @@
                             <input type="file" name="images[]">
                             <input type="file" name="images[]">
                         </div>
+                        @if($post->images)
+                        <div class="form-group">
+                            <label for="delete_image">画像削除</label>
+
+                            @foreach($post->images as $image)
+                            <input type="checkbox" name="delete_images[]" value="{{ $image->id }}"
+                            >
+                                <img src="{{ asset('storage/images/' . $post->id . '/' . $image->filename) }}" width="40" height="40"/>
+                            </input>
+                            @endforeach
+                        </div>
+                        @endif
+
                         <div class="text-right">
                             <button type="submit" class="btn btn-primary">送信</button>
                         </div>

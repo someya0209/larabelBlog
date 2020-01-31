@@ -141,6 +141,9 @@ class PostController extends Controller
                 $post->images()->create(['filename' => $upload_name,]);
             }
         }
+        foreach ($request->delete_images as $key => $image_id) {
+            $post->images()->find($image_id)->delete();
+        }
 
         return redirect()->route('posts.index');
     }
