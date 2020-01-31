@@ -89,8 +89,8 @@ class PostController extends Controller
         // アップロードするディレクトリ名を指定
         $up_dir = 'images/' . $select_id;
 
-        //アップロードに成功しているか確認
-        if ($request->file('image')->isValid([])) {
+        //ファイルがアップロードされているか確認
+        if ($request->hasFile('image')) {
             $filename = $request->file('image')->storeAs($up_dir, $upload_name, 'public');
 
             $post->images()->create(['filename' => $upload_name,]);
