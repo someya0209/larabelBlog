@@ -85,16 +85,18 @@ class PostController extends Controller
 
         // 選択したpostIDの取得
         $select_id = $post->id;
-        // アップロードしたファイル名を取得
-        $upload_name = $_FILES['image']['name'];
         // アップロードするディレクトリ名を指定
         $up_dir = 'images/' . $select_id;
-
         //ファイルがアップロードされているか確認
-        if ($request->hasFile('image')) {
-            $filename = $request->file('image')->storeAs($up_dir, $upload_name, 'public');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $key => $image) {
+                // アップロードしたファイル名を取得
+                // ファイル名がかぶる可能性、あとで修正
+                $upload_name = $key."_".$_FILES['images']['name'][$key];
+                $filename = $image->storeAs($up_dir, $upload_name, 'public');
 
-            $post->images()->create(['filename' => $upload_name,]);
+                $post->images()->create(['filename' => $upload_name,]);
+            }
         }
 
         return redirect()->route('posts.index');

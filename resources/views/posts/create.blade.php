@@ -27,6 +27,7 @@
                                 <div class="form-group">
                                     <label for="category">カテゴリ</label>
                                     <select name="category_id" id="category_id">
+                                        <option value="">選択してください </option>
                                         @foreach($categories as $category)
                                         <option
                                             value="{{ $category->id }}"
@@ -44,7 +45,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">画像ファイル</label>
-                                    <input type="file" name="image">
+                                    <input type="file" name="images[]">
+                                    <input type="file" name="images[]">
+                                    <input type="file" name="images[]">
+                                    <input type="file" name="images[]">
+                                    <input type="file" name="images[]">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">送信</button>
