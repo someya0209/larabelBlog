@@ -25,6 +25,11 @@
                             </ul>
                             <!-- 本文とタグとアクション -->
                             <p>{!! nl2br($post->body) !!}</p>
+                            @if($post->images)
+                            @foreach($post->images as $image)
+                            <img src="{{ asset('storage/images/' . $post->id . '/' . $image->filename) }}" width="40" height="40" alt="no_goods_image" />
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

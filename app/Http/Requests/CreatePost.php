@@ -29,6 +29,7 @@ class CreatePost extends FormRequest
             'title' => 'required|max:255',
             'body' => 'required',
             'category_id' => 'required',
+            'image' => 'file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 

@@ -14,7 +14,7 @@
                                 @endforeach
                             </div>
                             @endif
-                            <form action="{{ route('posts.create') }}" method="POST">
+                            <form action="{{ route('posts.create') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="title">タイトル</label>
@@ -29,7 +29,7 @@
                                     <select name="category_id" id="category_id">
                                         @foreach($categories as $category)
                                         <option
-                                        value="{{ $category->id }}"
+                                            value="{{ $category->id }}"
                                         >
                                             {{$category->title}}
                                         </option>
@@ -41,6 +41,10 @@
                                     @foreach ($tags as $tag)
                                         <input type="checkbox" name="tags[]" value="{{ $tag->id }}">{{ $tag->title }}
                                     @endforeach
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">画像ファイル</label>
+                                    <input type="file" name="image">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">送信</button>

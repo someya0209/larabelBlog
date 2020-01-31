@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\Image;
 use App\Http\Requests\CreatePost;
 use App\Http\Requests\EditPost;
 use Illuminate\Http\Request;
@@ -80,6 +81,20 @@ class PostController extends Controller
 
         Auth::user()->posts()->save($post);
         $post->tags()->attach(request()->tags);
+
+        // 選択したpostIDの取得
+        $select_id = $post->id;
+        // アップロードしたファイル名を取得
+        $upload_name = $_FILES['image']['name'];
+        // アップロードするディレクトリ名を指定
+        $up_dir = 'images/' . $select_id;
+
+        //アップロードに成功しているか確認
+        if ($request->file('image')->isValid([])) {
+            $filename = $request->file('image')->storeAs($up_dir, $upload_name, 'public');
+
+            $post->images()->create(['filename' => $upload_name,]);
+        }
 
         return redirect()->route('posts.index');
     }
