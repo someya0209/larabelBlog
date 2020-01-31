@@ -37,17 +37,17 @@ class PostController extends Controller
         $tags = $request->input('tags');
 
         $query = Post::query();
-
         if($request->has('keyword')) {
            $query->where('title', 'like', '%'.$keyword.'%');
         }
-        if($request->has('category')) {
-           $query->where('category_id', 'like', '%'.$category.'%');
+        //filledで空でないか確認
+        if($request->filled('category')) {
+           $query->where('category_id', $category);
         }
-        if($request->has('tags')) {
+        if($request->filled('tags')) {
            $query->whereHas('tags', function($query_t) use ($tags) {
                 foreach ($tags as $key => $id) {
-                    $query_t->where('id', 'like', '%'.$id.'%');
+                    $query_t->where('id', $id);
                 }
             });
         }
